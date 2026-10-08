@@ -292,8 +292,23 @@ document.addEventListener('click',e=>{
 });
 
 function checkout(){
-if(!cart.length){alert('Please add food to your cart.');return}
+const now=new Date();
+const currentMinutes=now.getHours()*60+now.getMinutes();
 
+const OPEN_TIME=13*60; // 1:00 PM
+const CLOSE_TIME=2*60; // 2:00 AM
+
+const isOpen=currentMinutes>=OPEN_TIME || currentMinutes<CLOSE_TIME;
+
+if(!isOpen){
+alert('Sorry! A.N.T FAST FOOD is currently CLOSED.\\n\\nOpening time: 1:00 PM\\nClosing time: 2:00 AM');
+return;
+}
+
+if(!cart.length){
+alert('Please add food to your cart.');
+return;
+}
 let l=['🍽️ A.N.T FAST FOOD ORDER',''],t=0;
 cart.forEach(x=>{let v=x.price*x.qty;t+=v;l.push('• '+x.name+' x '+x.qty+' = ₹'+v)});
 l.push('','💰 Total: ₹'+t);
