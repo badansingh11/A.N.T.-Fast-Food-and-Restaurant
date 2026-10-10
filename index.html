@@ -311,7 +311,10 @@ return;
 }
 let l=['🍽️ A.N.T FAST FOOD ORDER',''],t=0;
 cart.forEach(x=>{let v=x.price*x.qty;t+=v;l.push('• '+x.name+' x '+x.qty+' = ₹'+v)});
-l.push('','💰 Total: ₹'+t);
+const deliveryCharge = t >= 150 ? 0 : 20;
+t += deliveryCharge;
+l.push('', '🚚 Delivery Charge: ₹' + deliveryCharge);
+l.push('💰 Final Total: ₹' + t);
 
 const wa='https://wa.me/917014128149?text=';
 const manual='📍 Delivery Location: Please share your current location in WhatsApp (tap + → Location → Location → Send your current location).';
